@@ -29,6 +29,23 @@ const Tab = styled.span<{ isActive: boolean }>`
   }
 `;
 
+const GoBackBtn = styled.button`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  font-size: 12px;
+  font-weight: 400;
+  background-color: ${(props) => props.theme.accentColor};
+  padding: 7px 10px;
+  border-color: ${(props) => props.theme.textColor};
+  border-radius: 10px;
+  color: ${(props) => props.theme.textColor};
+  a {
+    display: block;
+  }
+`;
+
 const Title = styled.h1`
   font-size: 48px;
   color: ${(props) => props.theme.accentColor};
@@ -70,6 +87,7 @@ const Container = styled.div`
 const Header = styled.header`
   height: 15vh;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
 `;
@@ -159,6 +177,9 @@ function Coin() {
         </title>
       </Helmet>
       <Header>
+        <GoBackBtn>
+          <Link to={"/"}>Back to list</Link>
+        </GoBackBtn>
         <Title>
           {state?.name ? state.name : loading ? "Loading..." : infoData?.name}
         </Title>
