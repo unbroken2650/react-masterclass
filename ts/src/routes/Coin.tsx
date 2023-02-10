@@ -69,6 +69,7 @@ const OverviewItem = styled.div`
     margin-bottom: 5px;
   }
 `;
+
 const Description = styled.p`
   margin: 20px 0px;
 `;
@@ -165,8 +166,8 @@ function Coin() {
   );
   const { isLoading: tickersLoading, data: tickersData } = useQuery<PriceData>(
     ["tickers", coinId],
-    () => fetchCoinTickers(coinId)
-    // { refetchInterval: 5000 }
+    () => fetchCoinTickers(coinId),
+    { refetchInterval: 5000 }
   );
   const loading = infoLoading || tickersLoading;
   return (
@@ -223,7 +224,7 @@ function Coin() {
           </Tabs>
           <Switch>
             <Route path={`/:coinId/price`}>
-              <Price />
+              <Price coinId={coinId} />
             </Route>
             <Route path={`/:coinId/chart`}>
               <Chart coinId={coinId} />
