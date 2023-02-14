@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { fetchCoins } from "./../api";
 import { Helmet } from "react-helmet-async";
+import { DarkModeSwitch } from "react-toggle-dark-mode";
 
 const Container = styled.div`
   padding: 0px 20px;
@@ -11,18 +12,11 @@ const Container = styled.div`
 `;
 
 const Header = styled.header`
-  height: 10vh;
+  height: 15vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-`;
-
-const ToggleBtn = styled.button`
-  background-color: ${(props) => props.theme.bgColor};
-  color: ${(props) => props.theme.textColor};
-  border-radius: 15px;
-  margin-bottom: 10px;
 `;
 
 const CoinsList = styled.ul``;
@@ -32,6 +26,7 @@ const Coin = styled.li`
   color: ${(props) => props.theme.textColor};
   border-radius: 15px;
   margin-bottom: 10px;
+  border: 3px solid ${(props) => props.theme.accentColor};
   a {
     display: flex;
     align-items: center;
@@ -73,17 +68,28 @@ interface ICoin {
 
 interface ICoinsProps {
   toggleDark: () => void;
+  isDark: boolean;
 }
 
-function Coins({ toggleDark }: ICoinsProps) {
+function Coins({ isDark, toggleDark }: ICoinsProps) {
   const { isLoading, data } = useQuery<ICoin[]>("allCoins", fetchCoins);
   return (
     <Container>
       <Helmet>
         <title>Coins</title>
       </Helmet>
+      <DarkModeSwitch
+        style={{
+          position: "fixed",
+          bottom: "0",
+          right: "1em",
+          marginBottom: "2rem",
+        }}
+        checked={isDark}
+        onChange={toggleDark}
+        size={70}
+      />
       <Header>
-        <ToggleBtn onClick={toggleDark}>Toggle Dark Mode</ToggleBtn>
         <Title>Coins</Title>
       </Header>
       {isLoading ? (
