@@ -4,6 +4,8 @@ import styled from "styled-components";
 import { fetchCoins } from "./../api";
 import { Helmet } from "react-helmet-async";
 import { DarkModeSwitch } from "react-toggle-dark-mode";
+import { useRecoilValue, useSetRecoilState } from "recoil";
+import { isDarkAtom } from "../atoms";
 
 const Container = styled.div`
   padding: 0px 20px;
@@ -66,12 +68,10 @@ interface ICoin {
   type: string;
 }
 
-interface ICoinsProps {
-  toggleDark: () => void;
-  isDark: boolean;
-}
-
-function Coins({ isDark, toggleDark }: ICoinsProps) {
+function Coins() {
+  const isDark = useRecoilValue(isDarkAtom);
+  const setDarkAtom = useSetRecoilState(isDarkAtom);
+  const toggleDarkAtom = () => setDarkAtom((prev) => !prev);
   const { isLoading, data } = useQuery<ICoin[]>("allCoins", fetchCoins);
   return (
     <Container>
@@ -86,7 +86,7 @@ function Coins({ isDark, toggleDark }: ICoinsProps) {
           marginBottom: "2rem",
         }}
         checked={isDark}
-        onChange={toggleDark}
+        onChange={toggleDarkAtom}
         size={70}
       />
       <Header>
