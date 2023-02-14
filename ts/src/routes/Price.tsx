@@ -71,38 +71,42 @@ function Price({ coinId }: ChartProps) {
       <Helmet>
         <title>Price</title>
       </Helmet>
-      <Overview>
-        <OverviewItem>
-          <span>
-            Change in <br></br>15 Mins
-          </span>
-          <span>{tickersData?.quotes.USD.percent_change_15m}%</span>
-        </OverviewItem>
-        <OverviewItem>
-          <span>
-            Change in <br></br>60 Mins
-          </span>
-          <span>{tickersData?.quotes.USD.percent_change_1h}%</span>
-        </OverviewItem>
-        <OverviewItem>
-          <span>
-            Change in <br></br>6 Hours
-          </span>
-          <span>{tickersData?.quotes.USD.percent_change_6h}%</span>
-        </OverviewItem>
-        <OverviewItem>
-          <span>
-            Change in <br></br>1 Day
-          </span>
-          <span>{tickersData?.quotes.USD.percent_change_24h}%</span>
-        </OverviewItem>
-        <OverviewItem>
-          <span>
-            Change in <br></br>7 Days
-          </span>
-          <span>{tickersData?.quotes.USD.percent_change_7d}%</span>
-        </OverviewItem>
-      </Overview>
+      {tickersLoading ? (
+        "Price Loading"
+      ) : (
+        <Overview>
+          <OverviewItem>
+            <span>
+              Change in <br></br>15 Mins
+            </span>
+            <span>{tickersData?.quotes.USD.percent_change_15m}%</span>
+          </OverviewItem>
+          <OverviewItem>
+            <span>
+              Change in <br></br>60 Mins
+            </span>
+            <span>{tickersData?.quotes.USD.percent_change_1h}%</span>
+          </OverviewItem>
+          <OverviewItem>
+            <span>
+              Change in <br></br>6 Hours
+            </span>
+            <span>{tickersData?.quotes.USD.percent_change_6h}%</span>
+          </OverviewItem>
+          <OverviewItem>
+            <span>
+              Change in <br></br>1 Day
+            </span>
+            <span>{tickersData?.quotes.USD.percent_change_24h}%</span>
+          </OverviewItem>
+          <OverviewItem>
+            <span>
+              Change in <br></br>7 Days
+            </span>
+            <span>{tickersData?.quotes.USD.percent_change_7d}%</span>
+          </OverviewItem>
+        </Overview>
+      )}
     </>
   );
 }

@@ -107,7 +107,8 @@ function Coins({ isDark, toggleDark }: ICoinsProps) {
                   alt={coin.name}
                   src={`https://coinicons-api.vercel.app/api/icon/${coin.symbol.toLowerCase()}`}
                 />
-                {coin.name} &rarr;
+                <h2>{coin.name} </h2>
+                &rarr;
               </Link>
             </Coin>
           ))}
